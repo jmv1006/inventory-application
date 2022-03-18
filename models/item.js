@@ -8,13 +8,14 @@ let ItemSchema = new Schema(
         price: { type: Number },
         description: { type: String },
         brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
+        inStock: { type: Number}
     }
 );
 
 ItemSchema
 .virtual('url')
 .get(() => {
-    return '/shop/item/' + this._id;
+    return '/inventory/item/' + this._id;
 });
 
-module.exports = mongoose.model('Item', ItemSchema)
+module.exports = mongoose.model('Item', ItemSchema);

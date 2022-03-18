@@ -1,13 +1,11 @@
 const items = [];
 const categories = [];
 const brands = [];
-const itemInstances = [];
 
 const async = require('async');
 const Item = require('./models/item');
 const Category = require('./models/category');
 const Brand = require('./models/brand');
-const ItemInstance = require('./models/iteminstance')
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
@@ -48,13 +46,14 @@ function brandCreate(name, cb) {
     });
 };
 
-function itemCreate(name, category, price, description, brand, cb) {
+function itemCreate(name, category, price, description, brand, inStock, cb) {
     let itemDetail = {
         name: name,
         category: category,
         price: price,
         description: description,
-        brand: brand
+        brand: brand,
+        inStock: inStock
     }
 
     const item = new Item(itemDetail);
@@ -70,25 +69,6 @@ function itemCreate(name, category, price, description, brand, cb) {
     });
 };
 
-function itemInstanceCreate(item, inStock, cb) {
-    let itemInstanceDetail = {
-        item: item,
-        inStock: inStock
-    }
-
-    const itemInstance = new ItemInstance(itemInstanceDetail);
-
-    itemInstance.save((err) => {
-        if(err) {
-            console.log('error creating item instance' + itemInstance)
-            cb(err, null);
-            return
-        }
-        console.log('New Item Instance' + itemInstance);
-        itemInstances.push(itemInstance)
-        cb(null, item);
-    });
-};
 
 function createCategoriesAndBrands(cb) {
     async.series([
@@ -123,52 +103,32 @@ function createCategoriesAndBrands(cb) {
 function createItems(cb) {
     async.parallel([
         (callback) => {
-            itemCreate('Macbook Air', categories[0], 999.00, 'A lightweight computer for your everyday needs.', brands[1], callback);
+            itemCreate('Macbook Air', categories[0], 999.00, 'A lightweight computer for your everyday needs.', brands[1], 6, callback);
         },
         (callback) => {
-            itemCreate('Surface Tablet', categories[1], 599.00, 'Windows on the go.', brands[0], callback);
+            itemCreate('Surface Tablet', categories[1], 599.00, 'Windows on the go.', brands[0], 4, callback);
         },
         (callback) => {
-            itemCreate('Playstation 5', categories[3], 499.00, 'Power to the players. With a lightning fast SSD and ground breaking graphics, the PS5 truly is revolutionary.', brands[2], callback);
+            itemCreate('Playstation 5', categories[3], 499.00, 'Power to the players. With a lightning fast SSD and ground breaking graphics, the PS5 truly is revolutionary.', brands[2], 2, callback);
         },
         (callback) => {
-            itemCreate('Galaxy S21+ Ultra', categories[2], 1099.00, 'With the best camera on any smartphone, this is a gamechanger.', brands[3], callback);
+            itemCreate('Galaxy S21+ Ultra', categories[2], 1099.00, 'With the best camera on any smartphone, this is a gamechanger.', brands[3], 1, callback);
         },
     ],
     cb)
 };
 
-function createItemInstances(cb) {
-    async.parallel([
-        (callback) => {
-            itemInstanceCreate(items[0], 6, callback);
-        },
-        (callback) => {
-            itemInstanceCreate(items[1], 4, callback);
-        },
-        (callback) => {
-            itemInstanceCreate(items[2], 2, callback);
-        },
-        (callback) => {
-            itemInstanceCreate(items[3], 12, callback);
-        },
-    ],
-    cb);
-};
-
 async.series([
     createCategoriesAndBrands,
-    createItems,
-    createItemInstances
+    createItems
 ],
 (err, results) => {
     if (err) {
         console.log('Final err: ' + err)
     } else {
-        console.log('Item Instances: ' + itemInstances)
+        console.log('Items: ' + items)
     };
     //All done, disconnect from db
-    mongoose.connect.close();
 }
 );
 
