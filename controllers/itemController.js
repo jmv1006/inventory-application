@@ -5,8 +5,9 @@ exports.item_list = function (req,res) {
     Item.find({}, (err, result) => {
         if(err) {
             console.log('error')
+            return
         }
-        res.send(result)
+        res.render('item_list', {title: 'All Items', item_list: result});
     });
 };
 
