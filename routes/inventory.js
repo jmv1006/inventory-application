@@ -13,9 +13,13 @@ router.get('/', function(req, res) {
 //<---- ITEM INSTANCE ROUTES ---->
 
 // GET request for list of all item instances
-router.get('/all', 
+router.get('/items', 
   item_controller.item_list
 );
+
+router.get('/items/:id',
+  item_controller.item_detail_page
+)
 
 //GET request for listing all categories
 router.get('/categories',
