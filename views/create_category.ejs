@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form method="post">
+        <label for="categoryName">Category Name</label>
+        <input type="text" name="categoryName">
+        <label for="categoryDesc">Category Description</label>
+        <input type="text" name="categoryDesc">
+        <button type="submit">Submit</button>
+    </form>
+    <% if (errors) { %>
+      <ul>
+      <% errors.forEach((error) => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+      </ul>
+    <% } %>
+  </body>
+</html>

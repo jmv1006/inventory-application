@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form method="post">
+        <label for="itemName">Item Name</label>
+        <input type="text" name="itemName">
+        <label for="itemDesc">Item Description</label>
+        <input type="text" name="itemDesc">
+        <label for="itemPrice">Item Price</label>
+        <input type="number" name="itemPrice">
+        <label for="itemInStock">Quantity in stock</label>
+        <input type="number" name="itemInStock">
+        
+        <% categories.forEach((category) => { %>
+          <div><%= category.name %></div>
+          <input type="checkbox" name="categoryName" value="<%= category.name %>">
+        <% }) %>
+
+        <% brands.forEach((brand) => { %>
+          <div><%= brand.name %></div>
+          <input type="checkbox" name="brandName" value="<%= brand.name %>">
+        <% }) %>
+        
+        <button type="submit">Submit</button>
+        <% if (errors) { %>
+            <ul>
+            <% errors.forEach((error) => { %>
+              <li><%= error.msg %></li>
+            <% }) %>
+            </ul>
+          <% } %>
+    </form>
+  </body>
+</html>
