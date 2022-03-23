@@ -1,4 +1,41 @@
+body {
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
-#testId {
-  color: red;
+.headerContainer {
+  border: 2px solid blue;
+  width: 100%;
+  height: 5.5rem;
+}
+
+.mainBody {
+  width: 100vw;
+  height: 100vh;
+}
+
+.mainContentContainer {
+  width: 100%;
+  min-height: 25rem;
+  height: auto;
+  border: 2px solid orange;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.linksContainer {
+  border: 2px solid green;
+  width: 100%;
+  height: auto;
+  min-height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8rem;
+}
+.contentDisplayContainer {
+  border: 2px solid purple;
 }

@@ -10,7 +10,7 @@ exports.item_list = function (req,res) {
         if(err) {
             return
         }
-        res.render('item_list', {title: 'All Items', item_list: result});
+        res.render('item_list', {title: 'Items', item_list: result});
     });
 };
 

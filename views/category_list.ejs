@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1><%= title %></h1>
-      <% categories_list.forEach((category) => { %>
-          <a href="<%= category.url %>"><%= category.name %></a>
-      <% }) %>
+    <div class="mainBody">
+      <%- include("./partials/header") %>
+      <%- include("./partials/navbar") %>
+      <div class="mainContentContainer">
+        <h1><%= title %></h1>
+        <% categories_list.forEach((category) => { %>
+            <a href="<%= category.url %>"><%= category.name %></a>
+        <% }) %>
+      </div>
+    </div>
   </body>
 </html>

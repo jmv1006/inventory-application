@@ -8,6 +8,14 @@
     <title><%= title %></title>
   </head>
   <body>
-    <h1 id="testId"><%= title %></h1>
+    <div class="mainBody">
+      <%- include("./partials/header") %>
+      <%- include("./partials/navbar") %>
+      <div class="mainContentContainer">
+        <div class="contentDisplayContainer">
+          This is the homepage
+        </div>
+      </div>
+    </div>
   </body>
 </html>
