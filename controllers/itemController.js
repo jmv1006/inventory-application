@@ -108,26 +108,39 @@ exports.get_item_edit = function (req, res) {
 };
 
 exports.post_item_edit = function(req, res) {
-
-    Item.findById(req.params.id, (err, result) => {
-        const updatedItem =  new Item({
-            name: req.body.itemName,
-            description: req.body.itemDesc,
-            price: req.body.itemPrice,
-            inStock: req.body.itemInStock,
-            category: result.category,
-            brand: result.brand,
-            _id: req.params.id
-        });
-
-        Item.findByIdAndUpdate(req.params.id, updatedItem, {}, (err, item) => {
+    
+    async.parallel({
+        category: (cb) => {
+            category.findOne({name: req.body.categoryName}, cb)
+        },
+        brand: (cb) => {
+            brand.findOne({name: req.body.brandName}, cb)
+        }
+    },  
+        (err, result) => {
             if(err) {
-                console.log('error updating item')
+                console.log('Error finding items')
+                return
             }
-            res.redirect(item.url)
-        });
-    });
-
+            
+            const updatedItem =  new Item({
+                name: req.body.itemName,
+                description: req.body.itemDesc,
+                price: req.body.itemPrice,
+                inStock: req.body.itemInStock,
+                category: result.category._id,
+                brand: result.brand._id,
+                _id: req.params.id
+            });
+            
+            Item.findByIdAndUpdate(req.params.id, updatedItem, {}, (err, item) => {
+                if(err) {
+                    console.log('error updating item')
+                }
+                res.redirect(item.url)
+            });
+        }
+    );
 };
 
 exports.get_item_delete = function (req, res) {

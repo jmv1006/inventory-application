@@ -13,7 +13,6 @@ exports.brands_list = function(req, res) {
 };
 
 exports.brand_detail_page = function(req, res) {
-
     async.parallel({
         brand: (cb) => {
             Brand.findById(req.params.id).exec(cb);
@@ -29,4 +28,30 @@ exports.brand_detail_page = function(req, res) {
             res.render('brand_detail', {title: 'Brand Detail Page', brand: result.brand, brand_items: result.brand_items})
         }
     )
-}   
+};
+
+exports.get_create_brand = function (req, res) {
+    res.render('brand_create', {title: 'Create Brand'})
+};
+
+exports.post_create_brand = function (req, res) {
+
+    const newBrand = new Brand({
+        name: req.body.brandName,
+        description: req.body.brandDesc
+    })
+
+    Brand.findOne({'name': req.body.brandName}).exec((err, found_brand) => {
+        if (found_brand) {
+            res.redirect(found_brand.url)
+        } else {
+            newBrand.save((err) => {
+                if(err) {
+                    console.log('error saving new brand')
+                    return
+                }
+                res.redirect(newBrand.url)
+            });
+        };
+    })
+}

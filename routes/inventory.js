@@ -92,6 +92,14 @@ router.get('/brands',
   brand_controller.brands_list
 )
 
+router.get('/brands/create',
+  brand_controller.get_create_brand
+)
+
+router.post('/brands/create',
+  brand_controller.post_create_brand
+)
+
 router.get('/brands/:id',
   brand_controller.brand_detail_page
 )
