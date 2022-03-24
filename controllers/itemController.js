@@ -63,6 +63,7 @@ exports.create_item_page_post = (req, res) => {
         if(err) {
            //error 
         } else {
+            console.log(req.body)
             let newItem = new Item({
                 name: req.body.itemName,
                 description: req.body.itemDesc,
@@ -83,7 +84,33 @@ exports.create_item_page_post = (req, res) => {
     });
 };
          
+exports.get_item_edit = function (req, res) {
+    async.parallel({
+        item: (cb) => {
+            Item.findById(req.params.id)
+            .populate('category')
+            .populate('brand')
+            .exec(cb);
+        },
+        categories: (cb) => {
+            category.find(cb)
+        },
+        brands: (cb) => {
+            brand.find(cb)
+        }
+    },
+        (err, result) => {
+            if(err) {
+                return
+            }
+            res.render('item_edit', {title: 'Edit Item', item: result.item, categories: result.categories, brands: result.brands})
+        }
+    )
+};
 
+exports.post_item_edit = function(req, res) {
+    console.log(req.body)
+};
 
 
 

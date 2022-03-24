@@ -28,13 +28,13 @@
         <h1><%= title %></h1>
         <form method="post">
             <label for="itemName">Item Name</label>
-            <input type="text" name="itemName">
+            <input type="text" name="itemName" value="<%= item.name %>">
             <label for="itemDesc">Item Description</label>
-            <input type="text" name="itemDesc">
+            <input type="text" name="itemDesc" value="<%= item.description %>">
             <label for="itemPrice">Item Price</label>
-            <input type="number" name="itemPrice">
+            <input type="number" name="itemPrice" value="<%= item.price %>">
             <label for="itemInStock">Quantity in stock</label>
-            <input type="number" name="itemInStock">
+            <input type="number" name="itemInStock" value="<%= item.inStock %>">
 
               <select name="categoryName">
                 <% categories.forEach((category) => { %>
@@ -53,13 +53,6 @@
             </select>
             
             <button type="submit">Submit</button>
-            <% if (errors) { %>
-                <ul>
-                <% errors.forEach((error) => { %>
-                  <li><%= error.msg %></li>
-                <% }) %>
-                </ul>
-              <% } %>
         </form>
       </div>
     </div>

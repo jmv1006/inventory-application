@@ -13,10 +13,13 @@
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
         <h1><%= title %></h1>
-        <% categories_list.forEach((category) => { %>
-            <a href="<%= category.url %>"><%= category.name %></a>
-        <% }) %>
-        <a href="/inventory/categories/create">Create Category</a>
+        <form method="post">
+            <label for="categoryName">Category Name</label>
+            <input type="text" name="categoryName" value="<%= name %>">
+            <label for="categoryDesc">Category Description</label>
+            <input type="text" name="categoryDesc" value="<%= description %>">
+            <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   </body>

@@ -12,11 +12,19 @@
       <%- include("./partials/header") %>
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
-        <h1><%= title %></h1>
-        <% categories_list.forEach((category) => { %>
-            <a href="<%= category.url %>"><%= category.name %></a>
-        <% }) %>
-        <a href="/inventory/categories/create">Create Category</a>
+        <h1><%= category.name %></h1>
+        <% if(items) { %>
+            <div>Delete these items to delete the category:</div>
+            <ul>
+                <% items.forEach((item) => { %>
+                    <li><a href="<%= item.url %>"><%= item.name %></a></li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <form method="post">
+                <button type="submit">Delete</button>
+            </form>
+        <% } %>
       </div>
     </div>
   </body>

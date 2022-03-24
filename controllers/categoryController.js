@@ -38,33 +38,6 @@ exports.create_category_page = function (req, res) {
 };
 
 
-/*
-exports.create_category_post = function (req, res) {
-    Category.findOne({ 'name': req.body.categoryName }).exec((err, found_category) => {
-        if(found_category) {
-            //Category exists
-            res.redirect(found_category.url)
-        } else {
-            let newCategory = new Category({
-                name: req.body.categoryName,
-                description: req.body.categoryDesc
-            });
-
-            newCategory.save((err) => {
-                if(err) {
-                    //error saving category
-                }
-                res.redirect(newCategory.url)
-            })
-        }
-
-
-    })
-}
-*/
-
-
-
 exports.create_category_post = [
 
     body('categoryName', 'Input Category Name').trim().isLength({min: 3}).escape(),
@@ -103,3 +76,54 @@ exports.create_category_post = [
         }
     }
 ]
+
+exports.get_category_edit = function(req, res) {
+    Category.findById(req.params.id, (err, result) => {
+        res.render('edit_category', {title: 'Edit Category', name: result.name, description: result.description})
+    });
+};
+
+exports.post_category_edit = function(req, res) {
+
+    Category.findById(req.params.id, (err, result) => {
+
+        const updatedCategory = new Category({
+            name: req.body.categoryName,
+            description: req.body.categoryDesc,
+            _id: req.params.id
+        });
+        
+        Category.findByIdAndUpdate(req.params.id, updatedCategory, {}, (err, category) => {
+            if(err) {
+                console.log('Error updating category')
+                return
+            }
+            res.redirect(category.url);
+        });
+        
+    })
+};
+
+exports.get_category_delete = function(req, res) {
+    
+    Category.findById(req.params.id, (err, result) => {
+        Item.find({category: req.params.id}, (err, items) => {
+            if(items.length === 0) {
+                res.render('category_delete', {title: 'Delete Category', category: result, items: null})
+            }
+            else {
+                res.render('category_delete', {title: 'Delete Category', category: result, items: items})
+            }
+        });
+    });
+};
+
+exports.post_category_delete = function(req, res) {
+    Category.findByIdAndRemove(req.params.id, (err) => {
+        if(err) {
+            console.log('error deleting category')
+            return
+        }
+        res.redirect('/inventory/categories')
+    });
+}

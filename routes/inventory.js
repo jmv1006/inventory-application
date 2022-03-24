@@ -25,11 +25,17 @@ router.post('/items/create',
   item_controller.create_item_page_post
 )
 
+router.get('/items/:id/edit',
+  item_controller.get_item_edit
+)
+
+router.post('/items/:id/edit',
+  item_controller.post_item_edit
+)
+
 router.get('/items/:id',
   item_controller.item_detail_page
 )
-
-
 
 
 //<--- CATEGORIES ROUTE ---->
@@ -47,6 +53,26 @@ router.get('/categories/create',
 router.post('/categories/create',
   category_controller.create_category_post
 );
+
+//Create categeory Edit
+router.get('/categories/:id/edit',
+  category_controller.get_category_edit
+)
+
+//category edit POST
+router.post('/categories/:id/edit', 
+  category_controller.post_category_edit
+)
+
+//GET category delete page
+router.get('/categories/:id/delete',
+  category_controller.get_category_delete
+)
+
+//POST category delete
+router.post('/categories/:id/delete',
+  category_controller.post_category_delete
+)
 
 router.get('/categories/:id',
   category_controller.category_detail_page
