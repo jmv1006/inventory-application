@@ -100,6 +100,22 @@ router.post('/brands/create',
   brand_controller.post_create_brand
 )
 
+router.get('/brands/:id/edit',
+  brand_controller.get_edit_brand
+)
+
+router.post('/brands/:id/edit',
+  brand_controller.post_edit_brand
+)
+
+router.get('/brands/:id/delete',
+  brand_controller.get_delete_brand
+)
+
+router.post('/brands/:id/delete',
+  brand_controller.post_delete_brand
+)
+
 router.get('/brands/:id',
   brand_controller.brand_detail_page
 )

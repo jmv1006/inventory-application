@@ -13,15 +13,13 @@
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
         <h1><%= title %></h1>
-        <div><%= brand.name %></div>
-        <div><%= brand.description %></div>
-        <ul>
-            <% brand_items.forEach((item) => { %>
-                <li><a href="<%= item.url %>"><%= item.name %></a></li>
-            <% }) %>
-        </ul>
-        <a href="/inventory/brands/<%= brand._id %>/edit">Edit</a>
-        <a href="/inventory/brands/<%= brand._id %>/delete">Delete</a>
+        <form method="post">
+            <label for="brandName">Brand Name</label>
+            <input type="text" name="brandName" value="<%= brand.name %>">
+            <label for="brandDesc">Brand Description</label>
+            <input type="text" name="brandDesc" value="<%= brand.description %>">
+            <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   </body>

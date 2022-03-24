@@ -54,4 +54,55 @@ exports.post_create_brand = function (req, res) {
             });
         };
     })
-}
+};
+
+exports.get_edit_brand = function (req, res) {
+
+    Brand.findById(req.params.id, (err, result) => {
+        res.render('brand_edit', {title: 'Edit Brand', brand: result})
+    });
+
+};
+
+exports.post_edit_brand = function (req, res) {
+
+    Brand.findById(req.params.id, (err, result) => {
+
+        const editedBrand = new Brand({
+            name: req.body.brandName,
+            description: req.body.brandDesc,
+            _id: req.params.id
+        });
+
+        Brand.findByIdAndUpdate(req.params.id, editedBrand, {}, (err, brand) => {
+            if(err) {
+                console.log('error editing brand')
+                return
+            }
+            res.redirect(editedBrand.url)
+        })
+    })
+};
+
+exports.get_delete_brand = function (req, res) {
+    Brand.findById(req.params.id, (err, brand) => {
+        Item.find({brand: req.params.id}, (err, result) => {
+            console.group(result.length)
+            if(result.length === 0 ) {
+                res.render('brand_delete', {title: 'Delete brand', brand: brand, items: null})
+            } else {
+                res.render('brand_delete', {title: 'Delete brand', brand: brand, items: result})
+            };
+        });
+    });
+};
+
+exports.post_delete_brand = function (req, res) {
+    Brand.findByIdAndRemove(req.params.id, (err) => {
+        if(err) {
+            console.log('error deleting brand')
+            return
+        }
+        res.redirect('/inventory/brands')
+    });
+};

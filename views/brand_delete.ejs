@@ -12,16 +12,19 @@
       <%- include("./partials/header") %>
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
-        <h1><%= title %></h1>
-        <div><%= brand.name %></div>
-        <div><%= brand.description %></div>
-        <ul>
-            <% brand_items.forEach((item) => { %>
-                <li><a href="<%= item.url %>"><%= item.name %></a></li>
-            <% }) %>
-        </ul>
-        <a href="/inventory/brands/<%= brand._id %>/edit">Edit</a>
-        <a href="/inventory/brands/<%= brand._id %>/delete">Delete</a>
+        <h1><%= brand.name %></h1>
+        <% if(items) { %>
+            <div>Delete these items to delete the brand:</div>
+            <ul>
+                <% items.forEach((item) => { %>
+                    <li><a href="<%= item.url %>"><%= item.name %></a></li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <form method="post">
+                <button type="submit">Delete</button>
+            </form>
+        <% } %>
       </div>
     </div>
   </body>
