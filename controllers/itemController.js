@@ -63,7 +63,6 @@ exports.create_item_page_post = (req, res) => {
         if(err) {
            //error 
         } else {
-            console.log(req.body)
             let newItem = new Item({
                 name: req.body.itemName,
                 description: req.body.itemDesc,
@@ -109,9 +108,46 @@ exports.get_item_edit = function (req, res) {
 };
 
 exports.post_item_edit = function(req, res) {
-    console.log(req.body)
+
+    Item.findById(req.params.id, (err, result) => {
+        const updatedItem =  new Item({
+            name: req.body.itemName,
+            description: req.body.itemDesc,
+            price: req.body.itemPrice,
+            inStock: req.body.itemInStock,
+            category: result.category,
+            brand: result.brand,
+            _id: req.params.id
+        });
+
+        Item.findByIdAndUpdate(req.params.id, updatedItem, {}, (err, item) => {
+            if(err) {
+                console.log('error updating item')
+            }
+            res.redirect(item.url)
+        });
+    });
+
 };
 
+exports.get_item_delete = function (req, res) {
+  
+    Item.findById(req.params.id, (err, foundItem) => {
+        if(err) {
+            console.log('error finding item')
+            return
+        }
+        res.render('item_delete', {title: 'Delete Item', item: foundItem})
+    });
 
+};
 
-
+exports.post_item_delete = function (req, res) {
+    Item.findByIdAndRemove(req.params.id, (err) => {
+        if(err) {
+            console.log('error deleting item')
+            return
+        }
+        res.redirect('/inventory/items')
+    });
+};

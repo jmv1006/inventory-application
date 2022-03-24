@@ -33,6 +33,14 @@ router.post('/items/:id/edit',
   item_controller.post_item_edit
 )
 
+router.get('/items/:id/delete',
+  item_controller.get_item_delete
+);
+
+router.post('/items/:id/delete',
+  item_controller.post_item_delete
+)
+
 router.get('/items/:id',
   item_controller.item_detail_page
 )

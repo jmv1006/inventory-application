@@ -13,12 +13,10 @@
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
         <h1><%= title %></h1>
-        <h2><%= item.category.name %></h2>
-        <h2><%= item.brand.name %></h2>
-        <h2><%= item.name %></h2>
-        <div>In stock: <%= item.inStock %></div>
-        <a href="/inventory/items/<%= item._id %>/edit">Edit</a>
-        <a href="/inventory/items/<%= item._id %>/delete">Delete</a>
+        <div><%= item.name %></div>
+        <form method="post">
+            <button type="submit">Delete Item</button>
+        </form>
       </div>
     </div>
   </body>
