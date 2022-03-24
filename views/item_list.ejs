@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/items.css" />
     <title><%= title %></title>
   </head>
   <body>
@@ -12,13 +13,18 @@
       <%- include("./partials/header") %>
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
-        <h1><%= title %></h1>
-        <ul>
-          <% item_list.forEach((item) => { %>
-            <li><a href="<%= item.url %>"><%= item.name %></a></li>
-          <% }) %>
-        </ul>
-        <a href="/inventory/items/create">Create Item</a>
+        <div class="itemListContainer">
+          <div class="itemListTitle"><%= title %></div>
+          <div class="itemListFormContainer">
+            <% item_list.forEach((item) => { %>
+              <a class='itemListLink' href="<%= item.url %>">
+                <%= item.name %>
+                <div>Image here</div>
+              </a>
+            <% }) %>
+            </div>
+          <a class="createEditDeleteBtn" href="/inventory/items/create">Create Item</a>
+        </div>
       </div>
     </div>
   </body>

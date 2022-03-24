@@ -3,6 +3,8 @@ const async = require('async')
 const { body, validationResult, check } = require('express-validator');
 const category = require('../models/category');
 const brand = require('../models/brand');
+const Joi = require('joi');
+const { joinClasses } = require('jade/lib/runtime');
 
 //display all item instances
 exports.item_list = function (req,res) {  
@@ -51,7 +53,32 @@ exports.create_item_page_get = function (req, res) {
 
 
 exports.create_item_page_post = (req, res) => {
-    // find category and brand
+
+    const data = req.body;
+    
+    const schema = Joi.object({
+        itemName: Joi.string()
+            .min(3)
+            .required(),
+        itemDesc: Joi.string()
+            .min(3)
+            .required(),
+        itemPrice: Joi.number()
+            .integer()
+            .min(1)
+            .required(),
+        itemInStock: Joi.number()
+            .integer()
+            .min(1)
+            .required(),
+        categoryName: Joi.string()
+            .required(),
+        brandName: Joi.string()
+            .required()
+    });
+
+    const { error, value } = schema.validate(data);
+
     async.parallel({
         category: (cb) => {
             category.find({ name: req.body.categoryName}, cb)
@@ -61,7 +88,7 @@ exports.create_item_page_post = (req, res) => {
         },
     }, (err, result) => {
         if(err) {
-           //error 
+            
         } else {
             let newItem = new Item({
                 name: req.body.itemName,
@@ -81,6 +108,7 @@ exports.create_item_page_post = (req, res) => {
             })
         }
     });
+    
 };
          
 exports.get_item_edit = function (req, res) {

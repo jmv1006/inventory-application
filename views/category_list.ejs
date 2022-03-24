@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/categories.css" />
     <title><%= title %></title>
   </head>
   <body>
@@ -12,11 +13,15 @@
       <%- include("./partials/header") %>
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
-        <h1><%= title %></h1>
-        <% categories_list.forEach((category) => { %>
-            <a href="<%= category.url %>"><%= category.name %></a>
-        <% }) %>
-        <a href="/inventory/categories/create">Create Category</a>
+        <div class="categoryListContainer">
+            <div class="categoryListTitle"><%= title %></div>
+            <div class="categoryListFormContainer">
+              <% categories_list.forEach((category) => { %>
+                <a class="categoryListLink" href="<%= category.url %>"><%= category.name %></a>
+              <% }) %>
+            </div>
+          <a class="createEditDeleteBtn" href="/inventory/categories/create">Create Category</a>
+        </div>
       </div>
     </div>
   </body>

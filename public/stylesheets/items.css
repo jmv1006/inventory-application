@@ -1,0 +1,38 @@
+.itemListContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.75rem;
+    border: 2px solid green;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.itemListTitle {
+    color: white;
+}
+
+.itemListFormContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    gap: .25rem;
+}
+
+.itemListLink {
+    color: white;
+    text-decoration: none;
+    border: 2px solid blue;
+    width: 34rem;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
