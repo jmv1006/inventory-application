@@ -1,14 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap');
+
 body {
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  font-family: 'Hind Siliguri', sans-serif;
 }
 
 .headerContainer {
   border: 2px solid blue;
   width: 100%;
   height: 5.5rem;
-  background-color: #3d3d3d;
+  background-color: #0B0C10;
   color: white;
   display: flex;
   justify-content: center;
@@ -27,7 +30,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background-color: gray;
+  background-color: #272727;
 }
 
 .linksContainer {

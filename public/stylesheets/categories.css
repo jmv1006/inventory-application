@@ -12,7 +12,8 @@
 }
 
 .categoryListTitle {
-    color: white;
+    color: #FF652F;
+    font-size: 2.5rem;
 }
 
 .categoryListFormContainer {
@@ -26,13 +27,27 @@
 }
 
 .categoryListLink {
-    color: white;
+    color: black;
     text-decoration: none;
-    border: 2px solid blue;
+    border: 1px solid black;
     width: 34rem;
     height: 4rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: #a8a8a7;
+}
+
+.createCategoryContainer {
+    border: 2px solid blue;
+    color: white;
+}
+
+.createCategoryForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
 }

@@ -13,13 +13,13 @@
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
         <h2><%= category.name %></h2>
-        <a href="/inventory/categories/<%= category._id%>/edit">Update</a>
-        <a href="/inventory/categories/<%= category._id%>/delete">Delete</a>
         <ul>
             <% category_items.forEach((item) => { %>
                 <li><a href="<%= item.url %>"><%= item.name %></a></li>
             <% }) %>
         </ul>
+        <a href="/inventory/categories/<%= category._id%>/edit">Edit</a>
+        <a href="/inventory/categories/<%= category._id%>/delete">Delete</a>
       </div>
     </div>
   </body>

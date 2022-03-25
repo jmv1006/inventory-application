@@ -42,9 +42,10 @@ exports.create_category_post = [
 
     body('categoryName', 'Input Category Name').trim().isLength({min: 3}).escape(),
     body('categoryDesc', 'Input Category Desc').trim().isLength({min: 3}).escape(),
-
     (req, res, next) => {
         const errors = validationResult(req);
+
+        console.log(req.file.path)
 
         let newCategory = new Category({
             name: req.body.categoryName,
@@ -126,4 +127,4 @@ exports.post_category_delete = function(req, res) {
         }
         res.redirect('/inventory/categories')
     });
-}
+};

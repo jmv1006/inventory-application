@@ -8,6 +8,7 @@ let ItemSchema = new Schema(
         price: { type: Number },
         description: { type: String },
         brand: { type: Schema.Types.ObjectId, ref: 'Brand', required: true },
+        img: { data: Buffer, contentType: String},
         inStock: { type: Number}
     }
 );
