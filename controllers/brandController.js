@@ -1,6 +1,7 @@
 const Brand = require('../models/brand');
 const Item = require('../models/item')
 const async = require('async');
+const Joi = require('joi');
 
 exports.brands_list = function(req, res) {
     Brand.find({}, (err, result) => {
@@ -31,10 +32,29 @@ exports.brand_detail_page = function(req, res) {
 };
 
 exports.get_create_brand = function (req, res) {
-    res.render('brand_create', {title: 'Create Brand', errors: null})
+    res.render('brand_create', {title: 'Create Brand', errors: null, name: '', description: ''})
 };
 
 exports.post_create_brand = function (req, res) {
+    const schema = Joi.object({
+        brandName: Joi.string()
+            .min(3)
+            .messages({
+                'string.min': 'Brand name must have a length of at least 3 characters.'
+            }),
+        brandDesc: Joi.string()
+            .min(3)
+            .messages({
+                'string.min': 'Brand description must have a length of at least 3 characters.'
+            })
+    });
+
+    const { error, value } = schema.validate(req.body, {abortEarly: false})
+
+    if(error) {
+        res.render("brand_create", { title: "Create Brand", errors: error.details, name: req.body.brandName, description: req.body.brandDesc });
+        return
+    }
 
     const newBrand = new Brand({
         name: req.body.brandName,
@@ -59,12 +79,32 @@ exports.post_create_brand = function (req, res) {
 exports.get_edit_brand = function (req, res) {
 
     Brand.findById(req.params.id, (err, result) => {
-        res.render('brand_edit', {title: 'Edit Brand', brand: result})
+        res.render('brand_create', {title: 'Edit Brand', name: result.name, description: result.description, errors: null})
     });
 
 };
 
 exports.post_edit_brand = function (req, res) {
+
+    const schema = Joi.object({
+        brandName: Joi.string()
+            .min(3)
+            .messages({
+                'string.min': 'Brand name must have a length of at least 3 characters.'
+            }),
+        brandDesc: Joi.string()
+            .min(3)
+            .messages({
+                'string.min': 'Brand description must have a length of at least 3 characters.'
+            })
+    });
+
+    const { error, value } = schema.validate(req.body, {abortEarly: false})
+
+    if(error) {
+        res.render("brand_create", { title: "Create Brand", errors: error.details, name: req.body.brandName, description: req.body.brandDesc });
+        return
+    }
 
     Brand.findById(req.params.id, (err, result) => {
 
@@ -98,6 +138,7 @@ exports.get_delete_brand = function (req, res) {
 };
 
 exports.post_delete_brand = function (req, res) {
+
     Brand.findByIdAndRemove(req.params.id, (err) => {
         if(err) {
             console.log('error deleting brand')

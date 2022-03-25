@@ -8,7 +8,6 @@ body {
 }
 
 .headerContainer {
-  border: 2px solid blue;
   width: 100%;
   height: 5.5rem;
   background-color: #0B0C10;
@@ -34,7 +33,6 @@ body {
 }
 
 .linksContainer {
-  border: 2px solid green;
   width: 100%;
   height: auto;
   min-height: 3.5rem;
@@ -42,11 +40,30 @@ body {
   justify-content: center;
   align-items: center;
   gap: 8rem;
+  background-color: #191919;
+  color: white;
+  text-decoration: none;
+}
+
+.navLinkButton {
+  color: white;
+  text-decoration: none;
+}
+
+.navLinkButton:hover {
+  color: white;
+  text-decoration: underline;
 }
 .contentDisplayContainer {
-  border: 2px solid purple;
+  
 }
 
 .createEditDeleteBtn {
   color: white;
+  text-decoration: none;
+}
+
+.createEditDeleteBtn:hover {
+  color: white;
+  text-decoration: underline;
 }

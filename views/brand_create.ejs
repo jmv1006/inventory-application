@@ -17,9 +17,9 @@
           <h1><%= title %></h1>
           <form method="post">
               <label for="brandName">Brand Name</label>
-              <input type="text" name="brandName">
+              <input type="text" name="brandName" value="<%= name %>" required>
               <label for="brandDesc">Brand Description</label>
-              <input type="text" name="brandDesc">
+              <input type="text" name="brandDesc" value="<%= description %>" required>
               <button type="submit">Submit</button>
           </form>
           <% if (errors) { %>
