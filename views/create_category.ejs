@@ -17,17 +17,15 @@
           <h1><%= title %></h1>
           <form method="post" class="createCategoryForm">
               <label for="categoryName">Category Name</label>
-              <input type="text" name="categoryName">
+              <input type="text" name="categoryName" value="<%= name %>" required>
               <label for="categoryDesc">Category Description</label>
-              <input type="text" name="categoryDesc">
+              <input type="text" name="categoryDesc" value="<%= description %>" required>
               <button type="submit">Submit</button>
           </form>
           <% if (errors) { %>
-            <ul>
             <% errors.forEach((error) => { %>
-              <li><%= error.msg %></li>
+              <div>- <%= error.message %></div>
             <% }) %>
-            </ul>
           <% } %>
         </div>
         </div>

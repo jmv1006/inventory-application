@@ -31,7 +31,7 @@ exports.brand_detail_page = function(req, res) {
 };
 
 exports.get_create_brand = function (req, res) {
-    res.render('brand_create', {title: 'Create Brand'})
+    res.render('brand_create', {title: 'Create Brand', errors: null})
 };
 
 exports.post_create_brand = function (req, res) {

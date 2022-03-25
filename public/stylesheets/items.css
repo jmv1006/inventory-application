@@ -36,20 +36,31 @@
     justify-content: space-between;
     align-items: center;
     background-color: #a8a8a7;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.itemListImgContainer {
+    width: 3.5rem;
+    height: 3.4rem;
 }
 
 .createItemContainer {
-    border: 2px solid red;
     color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
 }
 
 .createItemForm {
-    border: 2px solid blue;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: .5rem;
+    width: 25rem;
 }
 
 .itemDetailContainer {

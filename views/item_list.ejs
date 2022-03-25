@@ -19,7 +19,11 @@
             <% item_list.forEach((item) => { %>
               <a class='itemListLink' href="<%= item.url %>">
                 <%= item.name %>
-                <div>Image here</div>
+                <% if(item.img.data) { %>
+                <div class="itemListImgContainer">
+                  <img class="itemImg" href=""src="data:image/<%=item.img.contentType%>;base64, <%=item.img.data.toString('base64')%>">
+                </div>
+                <% } %>
               </a>
             <% }) %>
             </div>

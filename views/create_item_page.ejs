@@ -17,13 +17,13 @@
           <h1><%= title %></h1>
           <form method="post" class="createItemForm" enctype="multipart/form-data">
               <label for="itemName">Item Name</label>
-              <input type="text" name="itemName" required>
+              <input type="text" name="itemName" value="<%= name %>" required>
               <label for="itemDesc">Item Description</label>
-              <input type="text" name="itemDesc" required>
+              <input type="text" name="itemDesc" value="<%= description %>" required>
               <label for="itemPrice">Item Price</label>
-              <input type="number" name="itemPrice" required>
+              <input type="number" name="itemPrice" value="<%= price %>" required>
               <label for="itemInStock">Quantity in stock</label>
-              <input type="number" name="itemInStock" required>
+              <input type="number" name="itemInStock" value="<%= inStock %>" required>
 
               <input type="file" name="itemImage">
   
@@ -45,13 +45,12 @@
             
   
               <button type="submit">Submit</button>
+              
               <% if (errors) { %>
-                  <ul>
-                  <% errors.forEach((error) => { %>
-                    <li><%= error.message %></li>
-                  <% }) %>
-                  </ul>
-                <% } %>
+                <% errors.forEach((error) => { %>
+                  <div>- <%= error.message %></div>
+                <% }) %>
+              <% } %>
           </form>
         </div>
       </div>

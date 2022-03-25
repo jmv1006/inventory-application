@@ -40,8 +40,12 @@
 }
 
 .createCategoryContainer {
-    border: 2px solid blue;
     color: white;
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .createCategoryForm {

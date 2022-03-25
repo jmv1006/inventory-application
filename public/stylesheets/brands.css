@@ -38,3 +38,7 @@
     align-items: center;
     background-color: #a8a8a7;
 }
+
+.createBrandContainer {
+    border: 2px solid blue;
+}
