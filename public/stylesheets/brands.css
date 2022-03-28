@@ -39,10 +39,6 @@
     font-size: 1.25rem;
 }
 
-.createBrandContainer {
-    border: 2px solid blue;
-}
-
 .brandDetailContainer {
     width: 95%;
     display: flex;
@@ -75,4 +71,20 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
+}
+.createBrandContainer {
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.brandForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
 }

@@ -46,6 +46,12 @@ exports.post_create_brand = function (req, res) {
             .min(3)
             .messages({
                 'string.min': 'Brand description must have a length of at least 3 characters.'
+            }),
+        adminCode: Joi.string()
+            .valid(process.env.ADMIN_CODE)
+            .required()
+            .messages({
+            'any.only': 'Incorrect Admin Password'
             })
     });
 
@@ -96,7 +102,13 @@ exports.post_edit_brand = function (req, res) {
             .min(3)
             .messages({
                 'string.min': 'Brand description must have a length of at least 3 characters.'
-            })
+            }),
+        adminCode: Joi.string()
+        .valid(process.env.ADMIN_CODE)
+        .required()
+        .messages({
+        'any.only': 'Incorrect Admin Password'
+        })
     });
 
     const { error, value } = schema.validate(req.body, {abortEarly: false})

@@ -15,8 +15,15 @@
         <h1><%= title %></h1>
         <div><%= item.name %></div>
         <form method="post">
+            <label for="adminCode">Admin Password</label>
+            <input type="password" name="adminCode" required>
             <button type="submit">Delete Item</button>
         </form>
+        <% if (errors) { %>
+          <% errors.forEach((error) => { %>
+            <div><%= error.message %></div>
+          <% }) %>
+        <% } %>
       </div>
     </div>
   </body>

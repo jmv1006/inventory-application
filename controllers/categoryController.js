@@ -1,9 +1,7 @@
 const Category = require("../models/category");
 const async = require("async");
 const Item = require("../models/item");
-const { body, validationResult, check } = require("express-validator");
 const Joi = require('joi');
-const { joinClasses } = require("jade/lib/runtime");
 
 exports.category_list = function (req, res) {
   Category.find({}, (err, result) => {
@@ -118,7 +116,13 @@ exports.post_category_edit = function (req, res) {
             .min(3)
             .messages({
                 'string.min': 'Category description must have a length of at least 3 characters.'
-            })
+            }),
+        adminCode: Joi.string()
+        .valid(process.env.ADMIN_CODE)
+        .required()
+        .messages({
+          'any.only': 'Incorrect Admin  Password'
+        })
     });
 
     const { error, value } = schema.validate(req.body, {abortEarly: false})
@@ -158,24 +162,44 @@ exports.get_category_delete = function (req, res) {
           title: "Delete Category",
           category: result,
           items: null,
+          errors: null
         });
       } else {
         res.render("category_delete", {
           title: "Delete Category",
           category: result,
           items: items,
+          errors: null
         });
-      }
+      };
     });
   });
 };
 
 exports.post_category_delete = function (req, res) {
-  Category.findByIdAndRemove(req.params.id, (err) => {
-    if (err) {
-      console.log("error deleting category");
-      return;
-    }
-    res.redirect("/inventory/categories");
+    const schema = Joi.object({
+      adminCode: Joi.string()
+      .valid(process.env.ADMIN_CODE)
+      .required()
+      .messages({
+        'any.only': 'Incorrect Admin Password'
+      })
   });
+
+  const { error, value } = schema.validate(req.body, {abortEarly: false})
+
+  if(error) {
+    Category.findById(req.params.id, (err, result) => {
+      res.render("category_delete", { title: "Delete Category", items: null, errors: error.details, category: result })
+    });
+    return
+  } else {
+    Category.findByIdAndRemove(req.params.id, (err) => {
+      if (err) {
+        console.log("error deleting category");
+        return;
+      }
+      res.redirect("/inventory/categories");
+    });
+  }
 };

@@ -15,11 +15,13 @@
       <div class="mainContentContainer">
         <div class="createBrandContainer">
           <h1><%= title %></h1>
-          <form method="post">
+          <form method="post" class="brandForm">
               <label for="brandName">Brand Name</label>
               <input type="text" name="brandName" value="<%= name %>" required>
               <label for="brandDesc">Brand Description</label>
               <input type="text" name="brandDesc" value="<%= description %>" required>
+              <label for="adminCode">Admin Password</label>
+              <input type="password" name="adminCode" required>
               <button type="submit">Submit</button>
           </form>
           <% if (errors) { %>

@@ -97,7 +97,13 @@ exports.create_item_page_post = (req, res, next) => {
           'number.min': 'Item in stock quantity must be greater than 0.'
         }),
     categoryName: Joi.string(),
-    brandName: Joi.string()
+    brandName: Joi.string(),
+    adminCode: Joi.string()
+    .valid(process.env.ADMIN_CODE)
+    .required()
+    .messages({
+      'any.only': 'Incorrect Admin Password'
+    })
 });
 
   const { error, value } = schema.validate(req.body, {abortEarly: false})
@@ -234,7 +240,13 @@ exports.post_item_edit = function (req, res) {
           'number.min': 'Item in stock quantity must be greater than 0.'
         }),
     categoryName: Joi.string(),
-    brandName: Joi.string()
+    brandName: Joi.string(),
+    adminCode: Joi.string()
+    .valid(process.env.ADMIN_CODE)
+    .required()
+    .messages({
+      'any.only': 'Incorrect Admin Password'
+    })
 });
 
   const { error, value } = schema.validate(req.body, {abortEarly: false})
@@ -317,15 +329,32 @@ exports.get_item_delete = function (req, res) {
     if (err) {
       res.redirect("/error");
     }
-    res.render("item_delete", { title: "Delete Item", item: foundItem });
+    res.render("item_delete", { title: "Delete Item", item: foundItem, errors: null });
   });
 };
 
 exports.post_item_delete = function (req, res) {
-  Item.findByIdAndRemove(req.params.id, (err) => {
-    if (err) {
-      res.redirect("/error");
-    }
-    res.redirect("/inventory/items");
+  const schema = Joi.object({
+    adminCode: Joi.string()
+    .valid(process.env.ADMIN_CODE)
+    .required()
+    .messages({
+      'any.only': 'Incorrect Admin Password'
+    })
   });
+
+  const { error, value } = schema.validate(req.body, {abortEarly: false})
+
+  if(error) {
+    Item.findById(req.params.id, (err, result) => {
+      res.render('item_delete', {title: 'Delete Item', item: result, errors: error.details })
+    })
+  } else {
+    Item.findByIdAndRemove(req.params.id, (err) => {
+      if (err) {
+        res.redirect("/error");
+      }
+      res.redirect("/inventory/items");
+    });
+  }
 };
