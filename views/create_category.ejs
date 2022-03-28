@@ -20,6 +20,8 @@
               <input type="text" name="categoryName" value="<%= name %>" required>
               <label for="categoryDesc">Category Description</label>
               <input type="text" name="categoryDesc" value="<%= description %>" required>
+              <label for="adminCode">Admin Password</label>
+              <input type="password" name="adminCode" required>
               <button type="submit">Submit</button>
           </form>
           <% if (errors) { %>

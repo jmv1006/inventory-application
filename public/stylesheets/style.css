@@ -15,6 +15,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .mainBody {
@@ -33,29 +35,26 @@ body {
 }
 
 .linksContainer {
-  width: 100%;
+  width: 100vw;
   height: auto;
   min-height: 3.5rem;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  gap: 8rem;
   background-color: #191919;
-  color: white;
-  text-decoration: none;
 }
 
 .navLinkButton {
   color: white;
   text-decoration: none;
+  width: 8rem;
+  text-align: center;
 }
 
 .navLinkButton:hover {
   color: white;
   text-decoration: underline;
-}
-.contentDisplayContainer {
-  
 }
 
 .createEditDeleteBtn {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/brands.css" />
     <title><%= title %></title>
   </head>
   <body>
@@ -12,16 +13,21 @@
       <%- include("./partials/header") %>
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
-        <h1><%= title %></h1>
-        <div><%= brand.name %></div>
-        <div><%= brand.description %></div>
-        <ul>
+        <div class="brandDetailContainer">
+          <div class="brandName"><%= brand.name %></div>
+          <% if(brand.description) { %>
+            <div class="brandDesc"><%= brand.description %></div>
+          <% } %>
+          <div class="brandDetailList">
             <% brand_items.forEach((item) => { %>
-                <li><a href="<%= item.url %>"><%= item.name %></a></li>
+                <a class='createEditDeleteBtn' href="<%= item.url %>">- <%= item.name %></a>
             <% }) %>
-        </ul>
-        <a href="/inventory/brands/<%= brand._id %>/edit">Edit</a>
-        <a href="/inventory/brands/<%= brand._id %>/delete">Delete</a>
+          </div>
+          <div class="editDeleteBrandBtnsContainer">
+            <a class='createEditDeleteBtn' href="/inventory/brands/<%= brand._id %>/edit">Edit</a>
+            <a class='createEditDeleteBtn' href="/inventory/brands/<%= brand._id %>/delete">Delete</a>
+          </div>
+        </div>
       </div>
     </div>
   </body>

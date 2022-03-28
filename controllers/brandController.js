@@ -9,7 +9,7 @@ exports.brands_list = function(req, res) {
             console.log("Error getting brands from db")
             return
         }
-        res.render('brand_list', {title: 'Brands List', brands_list: result})
+        res.render('brand_list', {title: 'Brands', brands_list: result})
     })
 };
 
@@ -26,7 +26,7 @@ exports.brand_detail_page = function(req, res) {
             if(err) {
                 console.log('Error finding brand info')
             }
-            res.render('brand_detail', {title: 'Brand Detail Page', brand: result.brand, brand_items: result.brand_items})
+            res.render('brand_detail', {title: 'Brand Detail', brand: result.brand, brand_items: result.brand_items})
         }
     )
 };

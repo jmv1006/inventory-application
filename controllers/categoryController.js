@@ -3,6 +3,7 @@ const async = require("async");
 const Item = require("../models/item");
 const { body, validationResult, check } = require("express-validator");
 const Joi = require('joi');
+const { joinClasses } = require("jade/lib/runtime");
 
 exports.category_list = function (req, res) {
   Category.find({}, (err, result) => {
@@ -46,7 +47,7 @@ exports.create_category_page = function (req, res) {
 };
 
 exports.create_category_post =  (req, res, next) => {
-    
+
     const schema = Joi.object({
         categoryName: Joi.string()
             .min(3)
@@ -57,6 +58,12 @@ exports.create_category_post =  (req, res, next) => {
             .min(3)
             .messages({
                 'string.min': 'Category description must have a length of at least 3 characters.'
+            }),
+        adminCode: Joi.string()
+            .valid(process.env.ADMIN_CODE)
+            .required()
+            .messages({
+              'any.only': 'Incorrect Admin  Password'
             })
     });
 
@@ -85,7 +92,7 @@ exports.create_category_post =  (req, res, next) => {
             res.redirect(newCategory.url);
         });
         }
-    });
+  });
 };
 
 exports.get_category_edit = function (req, res) {

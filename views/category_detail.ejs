@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/categories.css" />
     <title><%= title %></title>
   </head>
   <body>
@@ -12,14 +13,18 @@
       <%- include("./partials/header") %>
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
-        <h2><%= category.name %></h2>
-        <ul>
+        <div class="categoryDetailContainer">
+          <div class="categoryDetailTitle"><%= category.name %></div>
+          <div class="categoryItems">
             <% category_items.forEach((item) => { %>
-                <li><a href="<%= item.url %>"><%= item.name %></a></li>
+              <a class="createEditDeleteBtn" href="<%= item.url %>">- <%= item.name %></a>
             <% }) %>
-        </ul>
-        <a href="/inventory/categories/<%= category._id%>/edit">Edit</a>
-        <a href="/inventory/categories/<%= category._id%>/delete">Delete</a>
+          </div>
+          <div class="categoryEditDeleteBtns">
+            <a class="createEditDeleteBtn" href="/inventory/categories/<%= category._id%>/edit">Edit</a>
+            <a class="createEditDeleteBtn" href="/inventory/categories/<%= category._id%>/delete">Delete</a>
+          </div>
+        </div>
       </div>
     </div>
   </body>

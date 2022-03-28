@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.75rem;
+    gap: 1.5rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
@@ -26,7 +26,7 @@
 }
 
 .itemListLink {
-    color: black;
+    color: white;
     text-decoration: none;
     border: 1px solid black;
     width: 34rem;
@@ -35,7 +35,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #a8a8a7;
+    background-color: #191919;
     padding-left: .5rem;
     padding-right: .5rem;
 }
@@ -98,7 +98,6 @@
     align-items: center;
 }
 .itemDetailRightSide {
-    border: 2px solid black;
     min-width: 38rem;
     height: auto;
     max-height: 30rem;
@@ -110,6 +109,12 @@
     text-decoration: none;
 }
 
+.itemBrandName:hover {
+    color: #FF652F;
+    font-size: 1.3rem;
+    text-decoration: underline;
+}
+
 .itemName {
     font-size: 2rem;
 }
@@ -118,4 +123,10 @@
     color: #FF652F;
     font-size: .90rem;
     text-decoration: none;
+}
+
+.itemCategoryName:hover {
+    color: #FF652F;
+    font-size: .90rem;
+    text-decoration: underline;
 }
