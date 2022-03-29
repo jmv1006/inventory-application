@@ -103,6 +103,13 @@
     max-height: 30rem;
 }
 
+.itemEditDeleteBtnContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
 .itemBrandName {
     color: #FF652F;
     font-size: 1.3rem;
@@ -130,3 +137,25 @@
     font-size: .90rem;
     text-decoration: underline;
 }
+
+.itemDeleteContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.itemDeleteForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.deleteItemTitle{
+    font-size: 2rem;
+    margin-top: 1.5rem;
+}
+

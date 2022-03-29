@@ -139,11 +139,10 @@ exports.post_edit_brand = function (req, res) {
 exports.get_delete_brand = function (req, res) {
     Brand.findById(req.params.id, (err, brand) => {
         Item.find({brand: req.params.id}, (err, result) => {
-            console.group(result.length)
             if(result.length === 0 ) {
-                res.render('brand_delete', {title: 'Delete brand', brand: brand, items: null})
+                res.render('brand_delete', {title: 'Delete brand', brand: brand, items: null, errors: null})
             } else {
-                res.render('brand_delete', {title: 'Delete brand', brand: brand, items: result})
+                res.render('brand_delete', {title: 'Delete brand', brand: brand, items: result, errors: null})
             };
         });
     });
@@ -151,11 +150,28 @@ exports.get_delete_brand = function (req, res) {
 
 exports.post_delete_brand = function (req, res) {
 
-    Brand.findByIdAndRemove(req.params.id, (err) => {
-        if(err) {
-            console.log('error deleting brand')
-            return
-        }
-        res.redirect('/inventory/brands')
+    const schema = Joi.object({
+        adminCode: Joi.string()
+        .valid(process.env.ADMIN_CODE)
+        .required()
+        .messages({
+          'any.only': 'Incorrect Admin Password'
+        })
     });
+
+    const { error, value } = schema.validate(req.body, {abortEarly: false})
+
+    if(error) {
+        Brand.findById(req.params.id, (err, result) => {
+            res.render("brand_delete", { title: "Delete Brand", brand: result, errors: error.details, items: null});
+        })
+    } else {
+        Brand.findByIdAndRemove(req.params.id, (err) => {
+            if(err) {
+                console.log('error deleting brand')
+                return
+            }
+            res.redirect('/inventory/brands')
+        });
+    }
 };

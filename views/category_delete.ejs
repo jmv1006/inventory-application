@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/categories.css" />
     <title><%= title %></title>
   </head>
   <body>
@@ -12,26 +13,28 @@
       <%- include("./partials/header") %>
       <%- include("./partials/navbar") %>
       <div class="mainContentContainer">
-        <h1><%= category.name %></h1>
-        <% if(items) { %>
-            <div>Delete these items to delete the category:</div>
-            <ul>
-                <% items.forEach((item) => { %>
-                    <li><a href="<%= item.url %>"><%= item.name %></a></li>
-                <% }) %>
-            </ul>
-        <% } else { %>
-            <form method="post">
-                <label for="adminCode">Admin Password</label>
-                <input type="password" name="adminCode" required>
-                <button type="submit">Delete</button>
-            </form>
-        <% } %>
-        <% if (errors) { %>
-          <% errors.forEach((error) => { %>
-            <div><%= error.message %></div>
-          <% }) %>
-        <% } %>
+        <div class="categoryDeleteContainer">
+          <h1><%= category.name %></h1>
+          <% if(items) { %>
+              <div>Delete these items to delete the category:</div>
+              <ul>
+                  <% items.forEach((item) => { %>
+                      <li><a class="createEditDeleteBtn" href="<%= item.url %>"><%= item.name %></a></li>
+                  <% }) %>
+              </ul>
+          <% } else { %>
+              <form method="post">
+                  <label for="adminCode">Admin Password</label>
+                  <input type="password" name="adminCode" required>
+                  <button type="submit">Delete</button>
+              </form>
+          <% } %>
+          <% if (errors) { %>
+            <% errors.forEach((error) => { %>
+              <div><%= error.message %></div>
+            <% }) %>
+          <% } %>
+        </div>
       </div>
     </div>
   </body>

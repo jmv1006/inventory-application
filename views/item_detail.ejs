@@ -25,8 +25,10 @@
             <a href="<%= item.category.url %>" class="itemCategoryName"><%= item.category.name %></a>
             <div><%= item.description %></div>
             <div>In stock: <%= item.inStock %></div>
-            <a class="createEditDeleteBtn" href="/inventory/items/<%= item._id %>/edit">Edit</a>
-            <a class="createEditDeleteBtn" href="/inventory/items/<%= item._id %>/delete">Delete</a>
+            <div class="itemEditDeleteBtnContainer">
+              <a class="createEditDeleteBtn" href="/inventory/items/<%= item._id %>/edit">Edit</a>
+              <a class="createEditDeleteBtn" href="/inventory/items/<%= item._id %>/delete">Delete</a>
+            </div>
           </div>
         </div>
       </div>
