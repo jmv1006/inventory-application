@@ -157,6 +157,9 @@ exports.post_category_edit = function (req, res) {
 exports.get_category_delete = function (req, res) {
   Category.findById(req.params.id, (err, result) => {
     Item.find({ category: req.params.id }, (err, items) => {
+      if(err) {
+        res.redirect('/error')
+      }
       if (items.length === 0) {
         res.render("category_delete", {
           title: "Delete Category",
